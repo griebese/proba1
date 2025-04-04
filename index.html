@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Моя Валентинка 💘</title>
 
-  <!-- ШРИФТ -->
-  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
-
-  <!-- ИКОНКА ВКЛАДКИ -->
+  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://emoji.gg/assets/emoji/4689-love-pink-heart.png" type="image/png">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -26,29 +21,45 @@
       color: #d10068;
       text-align: center;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       overflow-x: hidden;
       position: relative;
+      transition: background 1s ease;
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-top: 30px;
-      padding: 0 20px;
-    }
-
-    .gif-container img {
-      max-width: 300px;
-      width: 80%;
+    h1 { 
+      font-size: 2.5em; 
+      margin-top: 20px; 
+      padding: 20px; 
+      background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
-      margin: 30px auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      color: #d10068;
+      width: 90%;
+      max-width: 500px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
     }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
+    .gif-container img { 
+      max-width: 300px; 
+      width: 80%; 
+      border-radius: 20px; 
+      margin: 30px auto; 
+      opacity: 0;
+      animation: fadeIn 2s forwards 0.5s;
+    }
+
+    .buttons { 
+      display: flex; 
+      justify-content: center; 
+      gap: 20px; 
+      flex-wrap: wrap; 
       margin-bottom: 20px;
+      z-index: 10;
     }
 
     button {
@@ -61,75 +72,62 @@
       background-color: #ffc0cb;
       color: #d10068;
       box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      opacity: 0;
+      animation: fadeIn 2s forwards 1s;
     }
 
-    button:hover {
-      background-color: #ff99aa;
+    button:hover { background-color: #ff99aa; }
+
+    .emoji { position: absolute; animation: float 10s linear infinite; opacity: 0.4; pointer-events: none; }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    .emoji {
-      position: absolute;
-      animation: float 10s linear infinite;
-      opacity: 0.4;
-      pointer-events: none;
+    @keyframes float { from { top: 100vh; } to { top: -10vh; } }
+
+    .shake { 
+      animation: shake 0.5s; 
+      animation-iteration-count: 3; 
     }
 
-    @keyframes float {
-      from {
-        top: 100vh;
-      }
-      to {
-        top: -10vh;
-      }
+    @keyframes shake { 
+      0% { transform: translate(0, 0); } 
+      25% { transform: translate(5px, 5px); } 
+      50% { transform: translate(-5px, -5px); } 
+      75% { transform: translate(5px, -5px); } 
+      100% { transform: translate(0, 0); } 
     }
 
-    #stats {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(255,255,255,0.6);
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: bold;
+    .date { 
+      position: fixed; 
+      top: 10px; 
+      left: 10px; 
+      background: rgba(255,255,255,0.6); 
+      padding: 5px 10px; 
+      border-radius: 12px; 
+      font-size: 14px; 
     }
 
-    .shake {
-      animation: shake 0.5s;
-      animation-iteration-count: 3;
+    .hidden-message {
+      font-size: 1.5em;
+      font-family: 'Roboto', sans-serif;
+      color: red;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards 2s;
     }
 
-    @keyframes shake {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(5px, 5px); }
-      50% { transform: translate(-5px, -5px); }
-      75% { transform: translate(5px, -5px); }
-      100% { transform: translate(0, 0); }
+    .night-mode {
+      background-color: #333;
+      color: white;
     }
 
-    .date {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background: rgba(255,255,255,0.6);
-      padding: 5px 10px;
-      border-radius: 12px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2em;
-      }
-
-      button {
-        font-size: 1.2em;
-        padding: 10px 20px;
-      }
-
-      #stats, .date {
-        font-size: 12px;
-      }
+    @media (max-width: 600px) { 
+      h1 { font-size: 2em; } 
+      button { font-size: 1.2em; padding: 10px 20px; } 
+      .hidden-message { font-size: 1.3em; }
     }
   </style>
 </head>
@@ -149,9 +147,18 @@
   </div>
 
   <div id="stats"></div>
+  <div id="hiddenMessage" class="hidden-message">ТЫ ЧТО МЕНЯ НЕ ЛЮБИШЬ? 😢</div>
 
   <audio id="bgMusic" loop>
     <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="noSound" preload="auto">
+    <source src="https://www.soundjay.com/button/beep-07.wav" type="audio/wav">
+  </audio>
+
+  <audio id="confettiSound" preload="auto">
+    <source src="https://www.soundjay.com/button/sounds/click-03.wav" type="audio/wav">
   </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -160,7 +167,9 @@
     const noBtn = document.getElementById("noBtn");
     const statsDiv = document.getElementById("stats");
     const music = document.getElementById("bgMusic");
-    const dateBox = document.getElementById("dateBox");
+    const noSound = document.getElementById("noSound");
+    const confettiSound = document.getElementById("confettiSound");
+    const hiddenMessage = document.getElementById("hiddenMessage");
 
     const yesPhrases = [
       "Я знал(а), что ты скажешь да! 😍",
@@ -181,26 +190,13 @@
       "Ты всё равно нажмешь 'Да' 😤",
       "НЕ ВЕРЮ!",
       "НЕЕЕЕЕЕЕЕТ 😩",
-      "ТЫ МЕНЯ СЛЫШИШЬ?!"
+      "ТЫ МЕНЯ НЕ ЛЮБИШЬ?!"
     ];
 
-    const angryList = ['😠','😤','😡','👿','🤬'];
-    const emojiList = ['💘','💕','😻','💞','🦄','🐱','🌈','🎀','💖','🐶'];
-
-    // Показать дату
     const today = new Date();
+    const hour = today.getHours();
+    const dateBox = document.getElementById("dateBox");
     dateBox.textContent = today.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-
-    // Фоновая эмодзи-анимация
-    for (let i = 0; i < 25; i++) {
-      const emoji = document.createElement('div');
-      emoji.classList.add('emoji');
-      emoji.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
-      emoji.style.left = Math.random() * 100 + 'vw';
-      emoji.style.fontSize = (1 + Math.random() * 2) + 'rem';
-      emoji.style.animationDuration = (5 + Math.random() * 5) + 's';
-      document.body.appendChild(emoji);
-    }
 
     let clickCount = 0;
 
@@ -217,17 +213,13 @@
       noBtn.style.transform = `scale(${1 + clickCount * 0.1})`;
       noBtn.textContent = noTexts[Math.min(clickCount - 1, noTexts.length - 1)];
 
-      const angry = document.createElement("div");
-      angry.textContent = angryList[Math.floor(Math.random() * angryList.length)];
-      angry.style.position = "absolute";
-      angry.style.left = Math.random() * 80 + 10 + 'vw';
-      angry.style.top = '60vh';
-      angry.style.fontSize = (2 + Math.random() * 2) + 'rem';
-      document.body.appendChild(angry);
-      setTimeout(() => angry.remove(), 2000);
+      noSound.play();
 
-      if (clickCount >= 10) {
-        document.body.classList.add("shake");
+      if (clickCount >= 6) {
+        hiddenMessage.style.display = 'block';
+        hiddenMessage.style.opacity = 1;
+        music.src = "https://www.bensound.com/bensound-music/bensound-sad.mp3";
+        music.play();
       }
 
       let noCount = parseInt(localStorage.getItem("noCount") || "0") + 1;
@@ -236,8 +228,8 @@
     });
 
     yesBtn.addEventListener("click", () => {
-      document.body.classList.remove("shake");
       music.pause();
+      confettiSound.play();
 
       let yesCount = parseInt(localStorage.getItem("yesCount") || "0") + 1;
       localStorage.setItem("yesCount", yesCount);
@@ -249,9 +241,6 @@
         <h1 style="font-size: 2.3em; margin-top: 30px;">${phrase}</h1>
         <img src="https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif" style="max-width: 300px; border-radius: 20px; margin-top: 20px;" alt="Love">
         
-        <!-- ТВОЁ ФОТО -->
-        <img src="https://your-image-url-here.jpg" alt="Мое фото" style="max-width: 250px; margin-top: 30px; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.2);" />
-
         <p style="margin-top: 25px; font-size: 1.4em;">С любовью, тебе, мое солнышко ☀️</p>
 
         <p style="margin-top: 10px; font-weight: bold;">Да: ${yesCount} | Нет: ${localStorage.getItem("noCount") || 0}</p>
@@ -262,10 +251,23 @@
       }, 800);
     });
 
-    // Авто запуск музыки
     document.addEventListener('click', () => {
       if (music.paused) music.play();
     }, { once: true });
+
+    // Пожелания на основе времени дня
+    const greetingText = document.createElement('h2');
+    if (hour < 12) {
+      greetingText.textContent = "Доброе утро, солнышко! 🌞";
+    } else if (hour < 18) {
+      greetingText.textContent = "Добрый день, любовь моя! 🌸";
+    } else {
+      greetingText.textContent = "Добрый вечер, моя радость! 🌙";
+    }
+    greetingText.style.fontFamily = '"Roboto", sans-serif';
+    greetingText.style.fontSize = '1.8em';
+    greetingText.style.marginTop = '30px';
+    document.body.appendChild(greetingText);
   </script>
 
 </body>
