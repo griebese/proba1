@@ -215,6 +215,16 @@
       "Котик ты мой! 😻"
     ];
 
+    const noPhrases = [
+      "Что значит нет? 😒",
+      "Серьезно? 😤",
+      "Точно нет? 🙄",
+      "Как это нет? 😡",
+      "Ты же меня любишь, да? 😅",
+      "Ты не хочешь быть моим котиком? 🐱",
+      "Ого! Неожиданно! 😱"
+    ];
+
     let musicPlaying = false;
 
     const today = new Date();
@@ -257,6 +267,13 @@
       noSound.play();
       let noCount = parseInt(localStorage.getItem("noCount") || "0") + 1;
       localStorage.setItem("noCount", noCount);
+
+      const phrase = noPhrases[Math.floor(Math.random() * noPhrases.length)];
+
+      const hiddenMessage = document.createElement('p');
+      hiddenMessage.textContent = phrase;
+      hiddenMessage.classList.add('hidden-message');
+      document.body.appendChild(hiddenMessage);
     });
 
     musicToggle.addEventListener("click", () => {
