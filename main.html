@@ -228,19 +228,23 @@
       }, 800);
     });
 
+    let clickCount = 0;
+
     noBtn.addEventListener("click", () => {
       noSound.play();
 
-      let currentScale = parseFloat(noBtn.style.transform.replace('scale(', '').replace(')', '')) || 1;
-      if (currentScale < 1.1) {
-        currentScale += 0.1;
-      }
-      noBtn.style.transform = `scale(${currentScale})`;
+      // Увеличиваем масштаб кнопки на 10% с каждым кликом
+      clickCount++;
+      const newScale = 1 + clickCount * 0.1;  // Увеличиваем на 10% с каждым разом
+      noBtn.style.transform = `scale(${newScale})`;
 
-      if (currentScale >= 1.1) {
-        setTimeout(() => {
-          noBtn.style.transform = `scale(1)`;
-        }, 300);
+      // Меняем текст кнопки
+      if (clickCount === 1) {
+        noBtn.textContent = "Сначала подумай, пожалуйста!";
+      } else if (clickCount === 2) {
+        noBtn.textContent = "Ты действительно уверен?";
+      } else if (clickCount === 3) {
+        noBtn.textContent = "Ладно... 😢";
       }
     });
 
@@ -258,4 +262,3 @@
 
 </body>
 </html>
-
