@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0;
       background-color: white;
-      background-image: url('https://i.imgur.com/K2ab0HK.png'); /* Сердечки на фоне */
+      background-image: url('https://i.imgur.com/K2ab0HK.png'); /* Здесь ты можешь поменять фон */
       background-size: 60px;
       background-position: center;
       font-family: 'Marck Script', cursive;
@@ -188,7 +188,7 @@
   <div id="stats"></div>
 
   <audio id="bgMusic" loop>
-    <source src="https://www.myinstants.com/media/sounds/nervy-ya-slishkom-vlyublenn.mp3" type="audio/mpeg">
+    <source src="https://www.myinstants.com/media/sounds/nervy-ya-slishkom-vlyublenn.mp3" type="audio/mpeg"> <!-- Здесь ты можешь вставить свою ссылку на песню -->
   </audio>
 
   <audio id="noSound" preload="auto">
@@ -261,7 +261,7 @@
       const phrase = noPhrases[Math.floor(Math.random() * noPhrases.length)];
 
       noBtn.innerHTML = `${phrase} 💔`;
-      noBtn.style.transform = `scale(${1 + 0.1})`; // Увеличение кнопки
+      noBtn.style.transform = `scale(1.2)`; // Увеличение кнопки
 
       setTimeout(() => {
         noBtn.style.transform = `scale(1)`; // Сброс размера кнопки
