@@ -159,6 +159,43 @@
       transform: scale(1.1);
     }
 
+    /* Стили для страницы "Да" */
+    .yes-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .typing-text {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #d10068;
+      animation: typing 3s steps(40) 1s 1 normal both, blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #d10068 }
+    }
+    
+    .love-emoji {
+      font-size: 2em;
+      margin: 10px;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
     @media (max-width: 600px) { 
       h1 { font-size: 2.3em; } 
       button { font-size: 1.7em; padding: 12px 28px; } 
@@ -215,25 +252,43 @@
       music.pause();
       confettiSound.play();
 
-      // Добавляем эмодзи на экран при нажатии "Да"
-      for (let i = 0; i < 10; i++) {
-        let emoji = document.createElement('div');
-        emoji.classList.add('emoji');
-        emoji.textContent = '💖';
-        emoji.style.left = `${Math.random() * 100}vw`;
-        emoji.style.animationDuration = `${Math.random() * 5 + 5}s`;
-        document.body.appendChild(emoji);
+      const emojis = ['💖', '💕', '💓', '💗', '💘', '💝', '💞', '💟', '🥰', '😍', '❤️', '🧡', '💛', '💚', '💙', '💜'];
+      
+      document.body.innerHTML = `
+        <div class="yes-page">
+          <div class="date">${dateBox.textContent}</div>
+          <h1 class="typing-text" style="font-size: 2.8em; margin-top: 30px; padding: 20px; background: rgba(255, 255, 255, 0.6); border-radius: 20px; color: #d10068; width: 90%; max-width: 600px;">Я тебя очень люблю, моё солнышко</h1>
+          <img src="https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif" style="max-width: 400px; border-radius: 20px; margin-top: 20px;" alt="Love">
+          
+          <div style="margin-top: 25px; font-size: 1.7em; display: flex; flex-wrap: wrap; justify-content: center;">
+            С любовью, тебе, мое солнышко 
+            ${emojis.sort(() => 0.5 - Math.random()).slice(0, 5).map(emoji => 
+              `<span class="love-emoji">${emoji}</span>`
+            ).join('')}
+          </div>
+        </div>
+      `;
+
+      // Создаем плавающие эмодзи
+      for (let i = 0; i < 20; i++) {
+        createFloatingEmoji(emojis);
       }
 
-      // Анимация печати текста
-      let message = "Я тебя очень люблю, моё солнышко <3";
-      let i = 0;
-      let textInterval = setInterval(() => {
-        document.querySelector('h1').innerText = message.slice(0, i);
-        i++;
-        if (i > message.length) clearInterval(textInterval);
-      }, 100);
+      setTimeout(() => {
+        confetti({ particleCount: 200, spread: 100 });
+      }, 800);
     });
+
+    function createFloatingEmoji(emojis) {
+      const emoji = document.createElement('div');
+      emoji.className = 'emoji';
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      emoji.style.animationDuration = (Math.random() * 15 + 5) + 's';
+      emoji.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(emoji);
+    }
 
     let clickCount = 0;
 
@@ -267,5 +322,6 @@
     });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
