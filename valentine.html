@@ -273,10 +273,7 @@
       }, 15000);
     }
 
-    yesBtn.addEventListener("click", () => {
-  confettiSound.play();
-
-  yesBtn.addEventListener("click", () => {
+   yesBtn.addEventListener("click", () => {
   confettiSound.play();
 
   document.body.innerHTML = `
@@ -313,42 +310,48 @@
         Ты поддержка, ты радость, ты улыбка моя
       </h1>
 
-      // Восстанавливаем кнопку музыки
-      const musicContainer = document.createElement('div');
-      musicContainer.innerHTML = `
-        <button id="musicToggle">${musicPlaying ? 'Выключить музыку 🔇' : 'Включить музыку 🎶'}</button>
-        <audio id="bgMusic" loop autoplay>
-          <source src="https://cdn6.sefon.pro/prev/YLBiTwWILAJDiN_3Q6apMg/1743850056/11/%D0%9D%D0%B5%D1%80%D0%B2%D1%8B%20-%20%D0%A1%D0%BB%D0%B8%D1%88%D0%BA%D0%BE%D0%BC%20%D0%92%D0%BB%D1%8E%D0%B1%D0%BB%D1%91%D0%BD%20%28192kbps%29.mp3" type="audio/mpeg">
-        </audio>
-      `;
-      document.body.appendChild(musicContainer);
-      
-      const newMusicToggle = document.getElementById("musicToggle");
-      const newMusic = document.getElementById("bgMusic");
-      
-      if (musicPlaying) {
-        newMusic.play();
-      }
-      
-      newMusicToggle.addEventListener("click", () => {
-        if (musicPlaying) {
-          newMusic.pause();
-          newMusicToggle.textContent = "Включить музыку 🎶";
-        } else {
-          newMusic.play();
-          newMusicToggle.textContent = "Выключить музыку 🔇";
-        }
-        musicPlaying = !musicPlaying;
-      });
+      <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW9zbnRkMmlkZW5pYTd5bXc0b2M0dnBtaHU5OHlqbzduYTdhamJrdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GKIiTfcyFthV6/giphy.gif" 
+           alt="Love" 
+           style="max-width: 90%; border-radius: 20px; margin-top: 30px;">
+    </div>
+  `;
 
-      // Создаем плавающие сердечки
-      const emojis = ['💖', '💕', '💓', '💗', '💘', '💝', '💞', '💟', '❤️'];
-      createInitialHearts();
+  // Восстанавливаем кнопку музыки
+  const musicContainer = document.createElement('div');
+  musicContainer.innerHTML = `
+    <button id="musicToggle">${musicPlaying ? 'Выключить музыку 🔇' : 'Включить музыку 🎶'}</button>
+    <audio id="bgMusic" loop autoplay>
+      <source src="https://cdn6.sefon.pro/prev/YLBiTwWILAJDiN_3Q6apMg/1743850056/11/%D0%9D%D0%B5%D1%80%D0%B2%D1%8B%20-%20%D0%A1%D0%BB%D0%B8%D1%88%D0%BA%D0%BE%D0%BC%20%D0%92%D0%BB%D1%8E%D0%B1%D0%BB%D1%91%D0%BD%20%28192kbps%29.mp3" type="audio/mpeg">
+    </audio>
+  `;
+  document.body.appendChild(musicContainer);
+  
+  const newMusicToggle = document.getElementById("musicToggle");
+  const newMusic = document.getElementById("bgMusic");
+  
+  if (musicPlaying) {
+    newMusic.play();
+  }
+  
+  newMusicToggle.addEventListener("click", () => {
+    if (musicPlaying) {
+      newMusic.pause();
+      newMusicToggle.textContent = "Включить музыку 🎶";
+    } else {
+      newMusic.play();
+      newMusicToggle.textContent = "Выключить музыку 🔇";
+    }
+    musicPlaying = !musicPlaying;
+  });
 
-      setTimeout(() => {
-        confetti({ particleCount: 200, spread: 100 });
-      }, 800);
-    });
+  // Создаем плавающие сердечки
+  const emojis = ['💖', '💕', '💓', '💗', '💘', '💝', '💞', '💟', '❤️'];
+  createInitialHearts();
+
+  setTimeout(() => {
+    confetti({ particleCount: 200, spread: 100 });
+  }, 800);
+});
 
     let clickCount = 0;
 
