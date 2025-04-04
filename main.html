@@ -1,264 +1,204 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Моя Валентинка 💘</title>
-  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://emoji.gg/assets/emoji/4689-love-pink-heart.png" type="image/png">
-  <style>
-    * { box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Романтичная страничка</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      background-image: url('https://i.imgur.com/K2ab0HK.png');
-      background-size: 60px;
-      background-position: center;
-      font-family: 'Marck Script', cursive;
-      color: #d10068;
-      text-align: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-      position: relative;
-    }
+        .btn {
+            font-size: 24px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            margin: 10px;
+        }
 
-    h1 { 
-      font-size: 3em; 
-      margin-top: 30px; 
-      padding: 20px; 
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      color: #d10068;
-      width: 90%;
-      max-width: 600px;
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-    }
+        .btn-yes {
+            background-color: #28a745;
+            color: white;
+        }
 
-    .gif-container img { 
-      max-width: 400px; 
-      width: 80%; 
-      border-radius: 20px; 
-      margin: 30px auto; 
-      opacity: 0;
-      animation: fadeIn 2s forwards 0.5s;
-    }
+        .btn-no {
+            background-color: #dc3545;
+            color: white;
+        }
 
-    .buttons { 
-      display: flex; 
-      justify-content: center; 
-      gap: 40px; 
-      flex-wrap: wrap; 
-      margin-bottom: 30px;
-    }
+        #message {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 30px;
+            display: none;
+        }
 
-    button {
-      font-size: 2em;
-      padding: 15px 35px;
-      border: none;
-      border-radius: 0px;
-      cursor: pointer;
-      transition: 0.3s;
-      background-color: #ffc0cb;
-      color: #d10068;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-      opacity: 0;
-      animation: fadeIn 2s forwards 1s;
-    }
+        #message span {
+            display: inline-block;
+            padding: 10px;
+        }
 
-    button:hover { background-color: #ff99aa; }
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            animation: move 4s ease-in-out infinite;
+        }
 
-    .emoji { position: absolute; animation: float 10s linear infinite; opacity: 0.4; pointer-events: none; }
+        @keyframes move {
+            0% {
+                top: 0;
+                left: 0;
+            }
+            50% {
+                top: 50%;
+                left: 50%;
+            }
+            100% {
+                top: 100%;
+                left: 100%;
+            }
+        }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
+        .music-btn {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 18px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+        }
 
-    @keyframes float { from { top: 100vh; } to { top: -10vh; } }
+        #textTyping {
+            font-size: 32px;
+            color: #ff4081;
+            margin-top: 30px;
+        }
 
-    .shake { 
-      animation: shake 0.5s; 
-      animation-iteration-count: 3; 
-    }
-
-    @keyframes shake { 
-      0% { transform: translate(0, 0); } 
-      25% { transform: translate(5px, 5px); } 
-      50% { transform: translate(-5px, -5px); } 
-      75% { transform: translate(5px, -5px); } 
-      100% { transform: translate(0, 0); } 
-    }
-
-    .hidden-message {
-      font-size: 1.5em;
-      font-family: 'Roboto', sans-serif;
-      color: red;
-      margin-top: 20px;
-      opacity: 0;
-      animation: fadeIn 2s forwards 2s;
-    }
-
-    .date { 
-      position: fixed; 
-      top: 10px; 
-      left: 10px; 
-      background: rgba(255,255,255,0.6); 
-      padding: 5px 10px; 
-      border-radius: 12px; 
-      font-size: 16px; 
-    }
-
-    .night-mode {
-      background-color: #333;
-      color: white;
-    }
-
-    #musicToggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background-color: #ffcccb;
-      border-radius: 20px;
-      font-size: 1.2em;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    #musicToggle:hover {
-      background-color: #ff99aa;
-    }
-
-    .yesBtn {
-      background-color: #4CAF50; /* Green */
-      color: white;
-    }
-
-    .noBtn {
-      background-color: #ffc0cb; /* Pink */
-      color: #d10068;
-    }
-
-    .yesBtn:hover {
-      background-color: #45a049;
-    }
-
-    .noBtn:hover {
-      background-color: #ff99aa;
-    }
-
-    .noBtn:active {
-      transform: scale(1.1);
-    }
-
-    @media (max-width: 600px) { 
-      h1 { font-size: 2.3em; } 
-      button { font-size: 1.7em; padding: 12px 28px; } 
-      .hidden-message { font-size: 1.3em; }
-    }
-
-  </style>
+    </style>
 </head>
 <body>
 
-  <div class="date" id="dateBox"></div>
+    <!-- Кнопки -->
+    <button class="btn btn-yes" id="btnYes">Да</button>
+    <button class="btn btn-no" id="btnNo">Нет</button>
 
-  <div class="gif-container">
-    <img src="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" alt="Valentine GIF">
-  </div>
+    <!-- Текст набирается -->
+    <p id="textTyping"></p>
 
-  <div class="buttons">
-    <button id="yesBtn" class="yesBtn">Да 💘</button>
-    <button id="noBtn" class="noBtn">Нет 💔</button>
-  </div>
+    <!-- Сообщение после нажатия "Да" -->
+    <p id="message">
+        <span>Я тебя очень люблю, моё солнышко! ❤️</span>
+    </p>
 
-  <div id="stats"></div>
+    <!-- Кнопка для включения/выключения музыки -->
+    <button class="music-btn" id="musicToggle">Включить музыку</button>
 
-  <audio id="bgMusic" loop>
-    <source src="https://www.myinstants.com/media/sounds/nervy-ya-slishkom-vlyublenn.mp3" type="audio/mpeg">
-  </audio>
+    <!-- Музыка -->
+    <audio id="bgMusic" loop>
+        <source src="https://example.com/your-romantic-track.mp3" type="audio/mp3">
+    </audio>
 
-  <audio id="noSound" preload="auto">
-    <source src="https://www.soundjay.com/button/beep-07.wav" type="audio/wav">
-  </audio>
+    <script>
+        const btnYes = document.getElementById("btnYes");
+        const btnNo = document.getElementById("btnNo");
+        const musicToggle = document.getElementById("musicToggle");
+        const bgMusic = document.getElementById("bgMusic");
+        const textTyping = document.getElementById("textTyping");
+        const message = document.getElementById("message");
 
-  <audio id="confettiSound" preload="auto">
-    <source src="https://www.soundjay.com/button/sounds/click-03.wav" type="audio/wav">
-  </audio>
+        let isMusicPlaying = false;
+        let noButtonTexts = [
+            "В СМЫСЛЕ НЕТ?",
+            "ПОЧЕМУ НЕТ?",
+            "Ты уверена, что НЕ хочешь?",
+            "Ну ладно, но ты передумаешь!",
+            "Нееееееееееееееееет!",
+            "Так ты точно не уверена!"
+        ];
 
-  <button id="musicToggle">Включить музыку 🎶</button>
+        let noButtonTextIndex = 0;
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const statsDiv = document.getElementById("stats");
-    const music = document.getElementById("bgMusic");
-    const noSound = document.getElementById("noSound");
-    const confettiSound = document.getElementById("confettiSound");
-    const musicToggle = document.getElementById("musicToggle");
-    const dateBox = document.getElementById("dateBox");
+        // Эмодзи
+        const emojiArray = ['💖', '💘', '😍', '💫', '🌹', '💌', '🌟'];
 
-    const today = new Date();
-    dateBox.textContent = today.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+        function addEmoji() {
+            const emoji = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+            const emojiElement = document.createElement('div');
+            emojiElement.textContent = emoji;
+            emojiElement.classList.add('emoji');
+            document.body.appendChild(emojiElement);
+        }
 
-    let musicPlaying = false;
+        // Добавление эмодзи при нажатии на "Да"
+        btnYes.addEventListener("click", () => {
+            message.style.display = "block";
+            for (let i = 0; i < 20; i++) {
+                setTimeout(addEmoji, i * 100);
+            }
+            startTypingEffect("Я тебя очень люблю, моё солнышко! ❤️");
+            bgMusic.play();
+            musicToggle.textContent = "Выключить музыку";
+            isMusicPlaying = true;
+        });
 
-    yesBtn.addEventListener("click", () => {
-      music.pause();
-      confettiSound.play();
+        // Набор текста
+        function startTypingEffect(text) {
+            let index = 0;
+            textTyping.textContent = "";
+            const typingInterval = setInterval(() => {
+                textTyping.textContent += text[index];
+                index++;
+                if (index === text.length) {
+                    clearInterval(typingInterval);
+                }
+            }, 100);
+        }
 
-      document.body.innerHTML = `
-        <div class="date">${dateBox.textContent}</div>
-        <h1 style="font-size: 2.8em; margin-top: 30px;">Я тебя очень люблю, моё солнышко <3</h1>
-        <img src="https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif" style="max-width: 400px; border-radius: 20px; margin-top: 20px;" alt="Love">
-        
-        <p style="margin-top: 25px; font-size: 1.7em;">С любовью, тебе, мое солнышко ☀️</p>
-      `;
+        // Кнопка "Нет" - увеличение кнопки и изменение текста
+        btnNo.addEventListener("click", () => {
+            // Увеличиваем кнопку
+            btnNo.style.transform = "scale(1.1)";
+            setTimeout(() => {
+                btnNo.style.transform = "scale(1)";
+            }, 300);
 
-      setTimeout(() => {
-        confetti({ particleCount: 200, spread: 100 });
-      }, 800);
-    });
+            // Меняем текст на кнопке "Нет"
+            btnNo.textContent = noButtonTexts[noButtonTextIndex];
 
-    let clickCount = 0;
+            // Обновляем индекс текста
+            noButtonTextIndex++;
+            if (noButtonTextIndex >= noButtonTexts.length) {
+                noButtonTextIndex = 0;
+            }
+        });
 
-    noBtn.addEventListener("click", () => {
-      noSound.play();
+        // Включение/выключение музыки
+        musicToggle.addEventListener("click", () => {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicToggle.textContent = "Включить музыку";
+            } else {
+                bgMusic.play();
+                musicToggle.textContent = "Выключить музыку";
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
 
-      // Увеличиваем масштаб кнопки на 10% с каждым кликом
-      clickCount++;
-      const newScale = 1 + clickCount * 0.1;  // Увеличиваем на 10% с каждым разом
-      noBtn.style.transform = `scale(${newScale})`;
-
-      // Меняем текст кнопки
-      if (clickCount === 1) {
-        noBtn.textContent = "Сначала подумай, пожалуйста!";
-      } else if (clickCount === 2) {
-        noBtn.textContent = "Ты действительно уверен?";
-      } else if (clickCount === 3) {
-        noBtn.textContent = "Ладно... 😢";
-      }
-    });
-
-    musicToggle.addEventListener("click", () => {
-      if (musicPlaying) {
-        music.pause();
-        musicToggle.textContent = "Включить музыку 🎶";
-      } else {
-        music.play();
-        musicToggle.textContent = "Выключить музыку 🔇";
-      }
-      musicPlaying = !musicPlaying;
-    });
-  </script>
-
+    </script>
 </body>
 </html>
