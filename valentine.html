@@ -276,19 +276,42 @@
     yesBtn.addEventListener("click", () => {
   confettiSound.play();
 
+  yesBtn.addEventListener("click", () => {
+  confettiSound.play();
+
   document.body.innerHTML = `
-    <div class="yes-page">
-      <div class="date">${dateBox.textContent}</div>
-      <h1>
-        <span>Каждый миг мне с тобой - это счастья момент,</span><br>
-        <span>Ведь с тобой есть всегда - и тепло, и успех,</span><br>
-        <span>Моя встреча с тобой - это праздник, мечта,</span><br>
-        <span>Ты поддержка, ты радость, ты улыбка моя</span>
-        <span>Верю я, что февраль смог свести нас неспроста!</span>
+    <div class="yes-page" style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    ">
+      <div class="date" style="
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(255,255,255,0.6);
+        padding: 5px 10px;
+        border-radius: 12px;
+      ">${dateBox.textContent}</div>
+
+      <h1 style="
+        font-size: 2.5em;
+        margin: 20px 0;
+        line-height: 1.6;
+        white-space: pre-line;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 30px;
+        border-radius: 20px;
+      ">
+        Каждый миг мне с тобой - это счастья момент,\n
+        Ведь с тобой есть всегда - и тепло, и успех,\n
+        Моя встреча с тобой - это праздник, мечта,\n
+        Ты поддержка, ты радость, ты улыбка моя
       </h1>
-      <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW9zbnRkMmlkZW5pYTd5bXc0b2M0dnBtaHU5OHlqbzduYTdhamJrdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GKIiTfcyFthV6/giphy.gif" alt="Love">
-    </div>
-  `;
 
       // Восстанавливаем кнопку музыки
       const musicContainer = document.createElement('div');
