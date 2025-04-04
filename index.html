@@ -1,51 +1,83 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Загрузка страницы...</title>
-  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      font-family: 'Marck Script', cursive;
-      color: #d10068;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-    h1 {
-      font-size: 2.5em;
-      animation: fadeIn 2s ease-in-out forwards;
-      opacity: 0;
-    }
-    h1:nth-child(1) { animation-delay: 0s; }
-    h1:nth-child(2) { animation-delay: 2s; }
-    h1:nth-child(3) { animation-delay: 4s; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для моей любимой</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+        .message {
+            position: absolute;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            font-size: 3em;
+            color: #d10068;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .message.active {
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .message {
+                font-size: 2em;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="message" id="message1">моя Настюша, моя зайка</div>
+    <div class="message" id="message2">Я очень-очень люблю тебя, мое солнышко ❤️</div>
+    <div class="message" id="message3">Ты самая невероятная девушка на всем белом свете!</div>
+    <div class="message" id="message4">А теперь перейдем к главному 😉</div>
 
-  <h1>Зайка моя, здравствуй! 🥰</h1>
-  <h1>А ты знала, что я тебя очень-очень люблю? 💖</h1>
-  <h1>А теперь знаешь ;)</h1>
-  <h1>Ты - моя мечта!</h1>
+    <script>
+        const messages = [
+            { id: "message1", delay: 0 },
+            { id: "message2", delay: 4000 },
+            { id: "message3", delay: 8000 },
+            { id: "message4", delay: 12000, nextPage: 16000 }
+        ];
 
-  <script>
-    setTimeout(() => {
-      window.location.href = 'main.html'; // Переход на главную страницу
-    }, 8000); // Через 8 секунд переход
-  </script>
+        function showMessages() {
+            messages.forEach((msg, index) => {
+                setTimeout(() => {
+                    const element = document.getElementById(msg.id);
+                    element.classList.add('active');
+                    
+                    // Скрываем предыдущее сообщение
+                    if (index > 0) {
+                        const prevElement = document.getElementById(messages[index-1].id);
+                        prevElement.classList.remove('active');
+                    }
 
+                    // Переход на следующую страницу
+                    if (msg.nextPage) {
+                        setTimeout(() => {
+                            window.location.href = "valentine.html"; // Замените на имя вашего файла с валентинкой
+                        }, msg.nextPage - msg.delay);
+                    }
+                }, msg.delay);
+            });
+        }
+
+        // Запускаем показ сообщений
+        showMessages();
+    </script>
 </body>
 </html>
