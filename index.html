@@ -31,21 +31,21 @@
     }
 
     h1 { 
-      font-size: 2.5em; 
-      margin-top: 20px; 
+      font-size: 3em; 
+      margin-top: 30px; 
       padding: 20px; 
       background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       color: #d10068;
       width: 90%;
-      max-width: 500px;
+      max-width: 600px;
       opacity: 0;
       animation: fadeIn 2s forwards;
     }
 
     .gif-container img { 
-      max-width: 300px; 
+      max-width: 400px; 
       width: 80%; 
       border-radius: 20px; 
       margin: 30px auto; 
@@ -56,17 +56,17 @@
     .buttons { 
       display: flex; 
       justify-content: center; 
-      gap: 20px; 
+      gap: 40px; 
       flex-wrap: wrap; 
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       z-index: 10;
     }
 
     button {
-      font-size: 1.5em;
-      padding: 10px 25px;
+      font-size: 2em;
+      padding: 15px 35px;
       border: none;
-      border-radius: 30px;
+      border-radius: 0px;
       cursor: pointer;
       transition: 0.3s;
       background-color: #ffc0cb;
@@ -107,7 +107,7 @@
       background: rgba(255,255,255,0.6); 
       padding: 5px 10px; 
       border-radius: 12px; 
-      font-size: 14px; 
+      font-size: 16px; 
     }
 
     .hidden-message {
@@ -124,9 +124,43 @@
       color: white;
     }
 
+    #musicToggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #ffcccb;
+      border-radius: 20px;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #musicToggle:hover {
+      background-color: #ff99aa;
+    }
+
+    .yesBtn {
+      background-color: #4CAF50; /* Green */
+      color: white;
+    }
+
+    .noBtn {
+      background-color: #ffc0cb; /* Pink */
+      color: #d10068;
+    }
+
+    .yesBtn:hover {
+      background-color: #45a049;
+    }
+
+    .noBtn:hover {
+      background-color: #ff99aa;
+    }
+
     @media (max-width: 600px) { 
-      h1 { font-size: 2em; } 
-      button { font-size: 1.2em; padding: 10px 20px; } 
+      h1 { font-size: 2.3em; } 
+      button { font-size: 1.7em; padding: 12px 28px; } 
       .hidden-message { font-size: 1.3em; }
     }
   </style>
@@ -142,12 +176,11 @@
   </div>
 
   <div class="buttons">
-    <button id="yesBtn">Да 💘</button>
-    <button id="noBtn">Нет 💔</button>
+    <button id="yesBtn" class="yesBtn">Да 💘</button>
+    <button id="noBtn" class="noBtn">Нет 💔</button>
   </div>
 
   <div id="stats"></div>
-  <div id="hiddenMessage" class="hidden-message">ТЫ ЧТО МЕНЯ НЕ ЛЮБИШЬ? 😢</div>
 
   <audio id="bgMusic" loop>
     <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
@@ -161,6 +194,8 @@
     <source src="https://www.soundjay.com/button/sounds/click-03.wav" type="audio/wav">
   </audio>
 
+  <button id="musicToggle">Включить музыку 🎶</button>
+
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     const yesBtn = document.getElementById("yesBtn");
@@ -169,7 +204,7 @@
     const music = document.getElementById("bgMusic");
     const noSound = document.getElementById("noSound");
     const confettiSound = document.getElementById("confettiSound");
-    const hiddenMessage = document.getElementById("hiddenMessage");
+    const musicToggle = document.getElementById("musicToggle");
 
     const yesPhrases = [
       "Я знал(а), что ты скажешь да! 😍",
@@ -180,52 +215,19 @@
       "Котик ты мой! 😻"
     ];
 
-    const noTexts = [
-      "В СМЫСЛЕ НЕТ?",
-      "Ты точно подумал(а)?",
-      "Ты ранишь мои чувства!",
-      "ПЕРЕДУМАЙ 😢",
-      "ПОЖАЛУЙСТА 😭",
-      "НУ ПОЖАЛУЙСТА 🥺",
-      "Ты всё равно нажмешь 'Да' 😤",
-      "НЕ ВЕРЮ!",
-      "НЕЕЕЕЕЕЕЕТ 😩",
-      "ТЫ МЕНЯ НЕ ЛЮБИШЬ?!"
-    ];
+    let musicPlaying = false;
 
     const today = new Date();
     const hour = today.getHours();
     const dateBox = document.getElementById("dateBox");
     dateBox.textContent = today.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    let clickCount = 0;
-
     function updateStats() {
       const yes = localStorage.getItem("yesCount") || 0;
-      const no = localStorage.getItem("noCount") || 0;
-      statsDiv.textContent = `Да: ${yes} | Нет: ${no}`;
+      statsDiv.textContent = `Да: ${yes}`;
     }
 
     updateStats();
-
-    noBtn.addEventListener("click", () => {
-      clickCount++;
-      noBtn.style.transform = `scale(${1 + clickCount * 0.1})`;
-      noBtn.textContent = noTexts[Math.min(clickCount - 1, noTexts.length - 1)];
-
-      noSound.play();
-
-      if (clickCount >= 6) {
-        hiddenMessage.style.display = 'block';
-        hiddenMessage.style.opacity = 1;
-        music.src = "https://www.bensound.com/bensound-music/bensound-sad.mp3";
-        music.play();
-      }
-
-      let noCount = parseInt(localStorage.getItem("noCount") || "0") + 1;
-      localStorage.setItem("noCount", noCount);
-      updateStats();
-    });
 
     yesBtn.addEventListener("click", () => {
       music.pause();
@@ -238,12 +240,12 @@
 
       document.body.innerHTML = `
         <div class="date">${dateBox.textContent}</div>
-        <h1 style="font-size: 2.3em; margin-top: 30px;">${phrase}</h1>
-        <img src="https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif" style="max-width: 300px; border-radius: 20px; margin-top: 20px;" alt="Love">
+        <h1 style="font-size: 2.8em; margin-top: 30px;">Я тебя очень люблю, моё солнышко <3</h1>
+        <img src="https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif" style="max-width: 400px; border-radius: 20px; margin-top: 20px;" alt="Love">
         
-        <p style="margin-top: 25px; font-size: 1.4em;">С любовью, тебе, мое солнышко ☀️</p>
+        <p style="margin-top: 25px; font-size: 1.7em;">С любовью, тебе, мое солнышко ☀️</p>
 
-        <p style="margin-top: 10px; font-weight: bold;">Да: ${yesCount} | Нет: ${localStorage.getItem("noCount") || 0}</p>
+        <p style="margin-top: 10px; font-weight: bold;">Да: ${yesCount}</p>
       `;
 
       setTimeout(() => {
@@ -251,23 +253,22 @@
       }, 800);
     });
 
-    document.addEventListener('click', () => {
-      if (music.paused) music.play();
-    }, { once: true });
+    noBtn.addEventListener("click", () => {
+      noSound.play();
+      let noCount = parseInt(localStorage.getItem("noCount") || "0") + 1;
+      localStorage.setItem("noCount", noCount);
+    });
 
-    // Пожелания на основе времени дня
-    const greetingText = document.createElement('h2');
-    if (hour < 12) {
-      greetingText.textContent = "Доброе утро, солнышко! 🌞";
-    } else if (hour < 18) {
-      greetingText.textContent = "Добрый день, любовь моя! 🌸";
-    } else {
-      greetingText.textContent = "Добрый вечер, моя радость! 🌙";
-    }
-    greetingText.style.fontFamily = '"Roboto", sans-serif';
-    greetingText.style.fontSize = '1.8em';
-    greetingText.style.marginTop = '30px';
-    document.body.appendChild(greetingText);
+    musicToggle.addEventListener("click", () => {
+      if (musicPlaying) {
+        music.pause();
+        musicToggle.textContent = "Включить музыку 🎶";
+      } else {
+        music.play();
+        musicToggle.textContent = "Выключить музыку 🔇";
+      }
+      musicPlaying = !musicPlaying;
+    });
   </script>
 
 </body>
