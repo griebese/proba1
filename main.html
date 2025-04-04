@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Моё солнышко 🌞</title>
+  <title>Моя Валентинка 💘</title>
   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://emoji.gg/assets/emoji/4689-love-pink-heart.png" type="image/png">
   <style>
@@ -13,7 +13,7 @@
       margin: 0;
       padding: 0;
       background-color: white;
-      background-image: url('https://img.freepik.com/premium-photo/red-hearts-whte-background-wallpaper_280388-985.jpg?w=996');
+      background-image: url('https://i.imgur.com/K2ab0HK.png');
       background-size: 60px;
       background-position: center;
       font-family: 'Marck Script', cursive;
@@ -29,22 +29,22 @@
     }
 
     h1 { 
-      font-size: 3em; 
+      font-size: 4em;
       margin-top: 30px; 
-      padding: 20px; 
+      padding: 30px;
       background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       color: #d10068;
       width: 90%;
-      max-width: 600px;
+      max-width: 800px;
       opacity: 0;
       animation: fadeIn 2s forwards;
     }
 
     .gif-container img { 
-      max-width: 400px; 
-      width: 80%; 
+      max-width: 600px;
+      width: 90%; 
       border-radius: 20px; 
       margin: 30px auto; 
       opacity: 0;
@@ -60,8 +60,8 @@
     }
 
     button {
-      font-size: 2em;
-      padding: 15px 35px;
+      font-size: 2.5em;
+      padding: 20px 45px;
       border: none;
       border-radius: 0px;
       cursor: pointer;
@@ -81,6 +81,7 @@
       opacity: 0.7; 
       pointer-events: none;
       z-index: 100;
+      top: -100px;
     }
 
     @keyframes fadeIn {
@@ -90,14 +91,10 @@
 
     @keyframes float { 
       0% { 
-        transform: translate(0, 100vh) rotate(0deg); 
-        opacity: 0; 
+        transform: translate(calc(100vw * var(--random-x)), 100vh) rotate(0deg); 
       }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
       100% { 
         transform: translate(calc(100vw * var(--random-x)), -100px) rotate(360deg); 
-        opacity: 0; 
       }
     }
 
@@ -118,8 +115,8 @@
       right: 10px;
       background-color: #ffcccb;
       border-radius: 20px;
-      font-size: 1.2em;
-      padding: 10px 20px;
+      font-size: 1.5em;
+      padding: 12px 25px;
       cursor: pointer;
       transition: 0.3s;
       z-index: 1000;
@@ -155,30 +152,36 @@
       justify-content: center;
       padding: 20px;
       width: 100%;
+      min-height: 100vh;
     }
     
     .yes-page h1 {
-      font-size: 2.8em;
+      font-size: 5em;
       margin-top: 30px;
-      padding: 20px;
+      padding: 30px;
       background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
       color: #d10068;
       width: 90%;
-      max-width: 600px;
-      animation: none;
+      max-width: 800px;
       opacity: 1;
+      position: relative;
+      z-index: 200;
     }
     
     .yes-page img {
-      max-width: 400px;
+      max-width: 700px;
       border-radius: 20px;
-      margin-top: 20px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 200;
     }
 
     @media (max-width: 600px) { 
-      h1 { font-size: 2.3em; } 
-      button { font-size: 1.7em; padding: 12px 28px; } 
+      h1 { font-size: 2.8em; } 
+      button { font-size: 2em; padding: 15px 35px; } 
+      .yes-page h1 { font-size: 3em; }
+      .yes-page img { max-width: 90%; }
     }
 
   </style>
@@ -188,8 +191,7 @@
   <div class="date" id="dateBox"></div>
 
   <div class="gif-container">
-    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG94YXp1eXpvenZxYWhxMzFhamNvOGd5Zms3aWs5aDdma2hndXozOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/x90dwDUuUx9Ys/giphy.gif" alt="Valentine GIF">
-    <p>Я тебя очень люблю! 💘</p> <!-- Текст под гифкой -->
+    <img src="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" alt="Valentine GIF">
   </div>
 
   <div class="buttons">
@@ -200,7 +202,7 @@
   <div id="stats"></div>
 
   <audio id="bgMusic" loop>
-    <source src="https://cdn3.sefon.pro/prev/SKkiwHmE3kTewW7vsxTJwg/1743846776/11/%D0%9D%D0%B5%D1%80%D0%B2%D1%8B%20-%20%D0%A1%D0%BB%D0%B8%D1%88%D0%BA%D0%BE%D0%BC%20%D0%92%D0%BB%D1%8E%D0%B1%D0%BB%D1%91%D0%BD%20%28192kbps%29.mp3" type="audio/mpeg">
+    <source src="https://www.myinstants.com/media/sounds/nervy-ya-slishkom-vlyublenn.mp3" type="audio/mpeg">
   </audio>
 
   <audio id="noSound" preload="auto">
@@ -227,81 +229,104 @@
     dateBox.textContent = today.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 
     let musicPlaying = false;
+    const noButtonTexts = [
+      "ЗАЯ",
+      "Я НЕ ПОНЯЛА",
+      "ЭТО ЧО ТАКОЕ",
+      "КАК ЭТО ПОНИМАТЬ",
+      "А НУ",
+      "НАЖМИ ДА",
+      "НУ ЗАЙ(("
+    ];
+
+    // Создаем плавающие сердечки заранее
+    function createInitialHearts() {
+      const emojis = ['💖', '💕', '💓', '💗', '💘', '💝', '💞', '💟', '❤️'];
+      for (let i = 0; i < 30; i++) {
+        createFloatingHeart(emojis, true);
+      }
+    }
+
+    function createFloatingHeart(emojis, initial = false) {
+      const heart = document.createElement('div');
+      heart.className = 'emoji';
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 40 + 30) + 'px';
+      heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      heart.style.animationDelay = (initial ? Math.random() * -10 : 0) + 's';
+      heart.style.setProperty('--random-x', Math.random());
+      document.body.appendChild(heart);
+      
+      setTimeout(() => {
+        heart.remove();
+        createFloatingHeart(emojis);
+      }, 15000);
+    }
 
     yesBtn.addEventListener("click", () => {
-      music.pause();
       confettiSound.play();
 
       document.body.innerHTML = `
         <div class="yes-page">
           <div class="date">${dateBox.textContent}</div>
-          <h1>Я тебя невероятно люблю, моё солнышко <3 Ты самая лучшая, самая прекрасная и невероятная, моя Настюша!</h1>
-          <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXBjdDBobHY5ZjNncHFydXYwZndsOHdwbGE0bXk1NDJ0ZnpqMGN3OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GKIiTfcyFthV6/giphy.gif" alt="Love">
+          <h1>Я тебя очень люблю, моё солнышко <3</h1>
+          <img src="https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif" alt="Love">
         </div>
       `;
 
+      // Восстанавливаем кнопку музыки
+      const musicContainer = document.createElement('div');
+      musicContainer.innerHTML = `
+        <button id="musicToggle">${musicPlaying ? 'Выключить музыку 🔇' : 'Включить музыку 🎶'}</button>
+        <audio id="bgMusic" loop autoplay>
+          <source src="https://www.myinstants.com/media/sounds/nervy-ya-slishkom-vlyublenn.mp3" type="audio/mpeg">
+        </audio>
+      `;
+      document.body.appendChild(musicContainer);
+      
+      const newMusicToggle = document.getElementById("musicToggle");
+      const newMusic = document.getElementById("bgMusic");
+      
+      if (musicPlaying) {
+        newMusic.play();
+      }
+      
+      newMusicToggle.addEventListener("click", () => {
+        if (musicPlaying) {
+          newMusic.pause();
+          newMusicToggle.textContent = "Включить музыку 🎶";
+        } else {
+          newMusic.play();
+          newMusicToggle.textContent = "Выключить музыку 🔇";
+        }
+        musicPlaying = !musicPlaying;
+      });
+
       // Создаем плавающие сердечки
       const emojis = ['💖', '💕', '💓', '💗', '💘', '💝', '💞', '💟', '❤️'];
-      for (let i = 0; i < 30; i++) {
-        createFloatingHeart(emojis);
-      }
+      createInitialHearts();
 
       setTimeout(() => {
         confetti({ particleCount: 200, spread: 100 });
       }, 800);
     });
 
-    function createFloatingHeart(emojis) {
-      const heart = document.createElement('div');
-      heart.className = 'emoji';
-      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
-      heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
-      heart.style.animationDelay = Math.random() * 5 + 's';
-      heart.style.setProperty('--random-x', Math.random());
-      document.body.appendChild(heart);
-      
-      // Удаляем сердечко после завершения анимации
-      setTimeout(() => {
-        heart.remove();
-        createFloatingHeart(emojis); // Создаем новое сердечко
-      }, 15000);
-    }
-
     let clickCount = 0;
 
     noBtn.addEventListener("click", () => {
       noSound.play();
 
-      // Увеличиваем масштаб кнопки на 10% с каждым кликом
       clickCount++;
       const newScale = 1 + clickCount * 0.1;
       noBtn.style.transform = `scale(${newScale})`;
 
-      // Меняем текст кнопки
-      if (clickCount === 1) {
-        noBtn.textContent = "Ты уверена, котик??";
-      } else if (clickCount === 2) {
-        noBtn.textContent = "Ты чего, не поняла!!!";
-      } else if (clickCount === 3) {
-        noBtn.textContent = "ЭЭЭЭЭ, а ну нажми да!!";
-      } else if (clickCount === 4) {
-        noBtn.textContent = "БЫСТРО!!!!";
-      } else if (clickCount === 5) {
-        noBtn.textContent = "Я ТЯ УКУШУ, ЗАЙ!!!";
-      } else if (clickCount === 6) {
-        noBtn.textContent = "НУ НАЖМИ ДА!!!";
-      } else if (clickCount === 7) {
-        noBtn.textContent = "НУ ЗАЯЯЯЯЯЯ";
-      } else if (clickCount === 8) {
-        noBtn.textContent = "УКУШУ ЖЕ!!!";
-      } else if (clickCount === 9) {
-        noBtn.textContent = "АХ ТЫ!!!!";
-      } else if (clickCount === 10) {
-        noBtn.textContent = "НУ ВСЕ!!!!";
-      } else if (clickCount === 11) {
-        noBtn.textContent = "МЯУУУУУ!";
+      // Меняем текст кнопки по новому списку
+      if (clickCount <= noButtonTexts.length) {
+        noBtn.textContent = noButtonTexts[clickCount - 1];
+      } else {
+        // Если кликов больше, чем фраз, начинаем сначала
+        noBtn.textContent = noButtonTexts[(clickCount - 1) % noButtonTexts.length];
       }
     });
 
