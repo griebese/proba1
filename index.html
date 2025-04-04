@@ -100,6 +100,15 @@
       100% { transform: translate(0, 0); } 
     }
 
+    .hidden-message {
+      font-size: 1.5em;
+      font-family: 'Roboto', sans-serif;
+      color: red;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards 2s;
+    }
+
     .date { 
       position: fixed; 
       top: 10px; 
@@ -108,15 +117,6 @@
       padding: 5px 10px; 
       border-radius: 12px; 
       font-size: 16px; 
-    }
-
-    .hidden-message {
-      font-size: 1.5em;
-      font-family: 'Roboto', sans-serif;
-      color: red;
-      margin-top: 20px;
-      opacity: 0;
-      animation: fadeIn 2s forwards 2s;
     }
 
     .night-mode {
@@ -156,6 +156,10 @@
 
     .noBtn:hover {
       background-color: #ff99aa;
+    }
+
+    .noBtn:active {
+      transform: scale(1.1);
     }
 
     @media (max-width: 600px) { 
@@ -225,26 +229,14 @@
       "Ого! Неожиданно! 😱"
     ];
 
-    let musicPlaying = false;
-
     const today = new Date();
     const hour = today.getHours();
     const dateBox = document.getElementById("dateBox");
     dateBox.textContent = today.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    function updateStats() {
-      const yes = localStorage.getItem("yesCount") || 0;
-      statsDiv.textContent = `Да: ${yes}`;
-    }
-
-    updateStats();
-
     yesBtn.addEventListener("click", () => {
       music.pause();
       confettiSound.play();
-
-      let yesCount = parseInt(localStorage.getItem("yesCount") || "0") + 1;
-      localStorage.setItem("yesCount", yesCount);
 
       const phrase = yesPhrases[Math.floor(Math.random() * yesPhrases.length)];
 
@@ -254,8 +246,6 @@
         <img src="https://media.giphy.com/media/qscdhWs5o3yb6/giphy.gif" style="max-width: 400px; border-radius: 20px; margin-top: 20px;" alt="Love">
         
         <p style="margin-top: 25px; font-size: 1.7em;">С любовью, тебе, мое солнышко ☀️</p>
-
-        <p style="margin-top: 10px; font-weight: bold;">Да: ${yesCount}</p>
       `;
 
       setTimeout(() => {
@@ -265,10 +255,10 @@
 
     noBtn.addEventListener("click", () => {
       noSound.play();
-      let noCount = parseInt(localStorage.getItem("noCount") || "0") + 1;
-      localStorage.setItem("noCount", noCount);
 
       const phrase = noPhrases[Math.floor(Math.random() * noPhrases.length)];
+
+      noBtn.style.transform = `scale(${1 + 0.1})`; // Увеличение кнопки
 
       const hiddenMessage = document.createElement('p');
       hiddenMessage.textContent = phrase;
